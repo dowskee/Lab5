@@ -10,48 +10,54 @@ namespace Lab5
     {
         static void Main(string[] args)
         {
+            Random r = new Random();
             bool RollAgain = true;
             while (RollAgain == true)
             {
 
-                int DieSide1, DieSide2;
-                //SideSelect from second method needs to generate random faces for DieSide1 and DieSide2 to then be added
-                DieSide1 = ReadInteger();
+                Console.WriteLine("Welcome to the Grand Circus Casino! I'm your host, Grant Chirpus! Roll the dice? (Y/N?)");
+                string Choice = Console.ReadLine();
 
-                DieSide2 = ReadInteger();
+                if ((Choice == "y") || (Choice == "Y") || (Choice == "yes") || (Choice == "Yes"))
+                {
+                    // application asks user to enter number of sides for die
+                    // then application prompts user to roll die
+                    // application will roll two (n-sided) die, and display the result of each
+                    // application will ask if user wants to roll again 
 
-                // application asks user to enter number of sides for die
-                // then application prompts user to roll die
-                // application will roll two (n-sided) die, and display the result of each
-                // application will ask if user wants to roll again 
 
-                int Result = Sum(DieSide1, DieSide2); //sum returned as result
-                Console.WriteLine(Result); //write result for user 
+                    Console.WriteLine("How many sides should each die have?");
+                    int diceface = int.Parse(Console.ReadLine());
+                    //SideSelect from second method needs to generate random faces for DieSide1 and DieSide2 to then be added
+                    Console.WriteLine("You selected your dice to have " + diceface + " sides");
 
-            }
-            string UserSelection; //while loop from top for rollagain prompt
-            Console.WriteLine("Roll Again? (Y or N?)");
-            UserSelection = Console.ReadLine();
+                    Console.WriteLine("You Rolled:");
 
-            if ((UserSelection == "n") || (UserSelection == "N") || (UserSelection == "no") || (UserSelection == "No"))
-            {
-                RollAgain = false;
-                Console.WriteLine("Your loss. House wins!");
+                   
+                    int DieSide1 = r.Next(1, diceface-1);
+                    int DieSide2 = r.Next(1, diceface-1);
+
+                    Console.WriteLine(DieSide1);
+                    Console.WriteLine(DieSide2); //print random numbers
+                    Random(DieSide1, DieSide2); //will return snake eyes, craps, box car. Call without using Console.WriteLine();
+
+                }
+                string UserSelection; //while loop from top for roll again prompt
+                Console.WriteLine("Roll Again? (Y or N?)");
+                UserSelection = Console.ReadLine();
+
+                if ((UserSelection == "n") || (UserSelection == "N") || (UserSelection == "no") || (UserSelection == "No"))
+                {
+                    RollAgain = false;
+                    Console.WriteLine("Your loss. House wins!");
+                }
             }
         }
-            public static int ReadInteger()
+            public static void Random(int DieSide1, int DieSide2) //make void return type to cancel out integer return in main method
             {
-                int SideSelect;
-                Console.WriteLine("Welcome to the Grand Circus Casino! I'm your host, Grant Chirpus! Please select any number-sided die of your choosing:");
-                SideSelect = int.Parse(Console.ReadLine());
 
-                return SideSelect; //takes number selected and produces random generation of two numbers (Die1 and Die2) for next method
-
-            }
-        
-            public static int Sum(int DieSide1, int DieSide2)
-            {
-                int Result = DieSide1 + DieSide2;
+                int Result = (DieSide1) & (DieSide2);
+                
 
                 if (DieSide1 + DieSide2 == 2) //sum of 1+1 is 2, snake eyes
                 {
@@ -67,7 +73,8 @@ namespace Lab5
                 {
                     Console.WriteLine("Box Cars!"); //box cars returns two 6-faced die. 
                 }
-                return Result;
+                
             }
+        
     }
 }
