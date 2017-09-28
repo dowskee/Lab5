@@ -15,7 +15,7 @@ namespace Lab5
             {
 
                 int DieSide1, DieSide2;
-
+                //SideSelect from second method needs to generate random faces for DieSide1 and DieSide2 to then be added
                 DieSide1 = ReadInteger();
 
                 DieSide2 = ReadInteger();
@@ -29,7 +29,16 @@ namespace Lab5
                 Console.WriteLine(Result); //write result for user 
 
             }
+            string UserSelection; //while loop from top for rollagain prompt
+            Console.WriteLine("Roll Again? (Y or N?)");
+            UserSelection = Console.ReadLine();
 
+            if ((UserSelection == "n") || (UserSelection == "N") || (UserSelection == "no") || (UserSelection == "No"))
+            {
+                RollAgain = false;
+                Console.WriteLine("Your loss. House wins!");
+            }
+        }
             public static int ReadInteger()
             {
                 int SideSelect;
@@ -39,38 +48,26 @@ namespace Lab5
                 return SideSelect; //takes number selected and produces random generation of two numbers (Die1 and Die2) for next method
 
             }
-
-            public static int Sum(int Die1, int Die2)
+        
+            public static int Sum(int DieSide1, int DieSide2)
             {
-                int Result = Die1 + Die2;
+                int Result = DieSide1 + DieSide2;
 
                 if (DieSide1 + DieSide2 == 2) //sum of 1+1 is 2, snake eyes
                 {
-                   Console.WriteLine("Snake Eyes!");
+                    Console.WriteLine("Snake Eyes!");
                 }
 
                 else if (DieSide1 + DieSide2 == 7 || DieSide1 + DieSide2 == 11)
                 {
-                   Console.WriteLine("Craps!"); //craps is total of 7 or 11
+                    Console.WriteLine("Craps!"); //craps is total of 7 or 11
                 }
 
                 else if (DieSide1 == 6 && DieSide2 == 6)
                 {
-                   Console.WriteLine("Box Cars!"); //box cars returns two 6-faced die. 
+                    Console.WriteLine("Box Cars!"); //box cars returns two 6-faced die. 
                 }
-                    return Result;
-                }
-            
-
-            string UserSelection;
-            Console.WriteLine("Roll Again? (Y or N?)");
-            UserSelection = Console.ReadLine();
-            
-            if ((UserSelection == "n") || (UserSelection == "N") || (UserSelection == "no") || (UserSelection == "No"))
-            {
-            RollAgain = false;
-            Console.WriteLine("Your loss. House wins!");
+                return Result;
             }
-        }
     }
 }
